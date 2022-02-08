@@ -242,7 +242,7 @@ namespace StickersTemplate
                 { "Locale", clientInfoEntity?.Properties["locale"]?.ToString() },
                 { "Platform", clientInfoEntity?.Properties["platform"]?.ToString() }
             };
-            this.telemetryClient.TrackTrace(activity.toString(), SeverityLevel.Information);
+            this.telemetryClient.TrackTrace("TestJiwei", SeverityLevel.Information);
             //this.telemetryClient.TrackEvent("UserActivity", properties);
         }
     }

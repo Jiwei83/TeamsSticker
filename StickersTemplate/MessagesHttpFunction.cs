@@ -240,6 +240,7 @@ namespace StickersTemplate
                 { "Locale", clientInfoEntity?.Properties["locale"]?.ToString() },
                 { "Platform", clientInfoEntity?.Properties["platform"]?.ToString() }
             };
+            logger.LogInformation(activity);
             this.telemetryClient.TrackEvent("UserActivity", properties);
         }
     }

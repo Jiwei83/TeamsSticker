@@ -115,7 +115,7 @@ namespace StickersTemplate
                     var authorizationHeader = GetAuthorizationHeader(req);
                     activity = await ParseRequestBody(req);
                     await JwtTokenValidation.AuthenticateRequest(activity, authorizationHeader, credentialProvider, channelProvider);
-                    logger.LogInformation(activity);
+                    logger.LogInformation("Logging info {@Activity}", activity);
                 }
                 catch (JsonReaderException e)
                 {
@@ -242,8 +242,8 @@ namespace StickersTemplate
                 { "Locale", clientInfoEntity?.Properties["locale"]?.ToString() },
                 { "Platform", clientInfoEntity?.Properties["platform"]?.ToString() }
             };
-            logger.LogInformation(activity);
-            this.telemetryClient.TrackEvent("UserActivity", properties);
+            this.telemetryClient.TrackTrace(activity.toString(), SeverityLevel.Information);
+            //this.telemetryClient.TrackEvent("UserActivity", properties);
         }
     }
 }

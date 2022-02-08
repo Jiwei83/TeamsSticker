@@ -109,6 +109,8 @@ namespace StickersTemplate
 
                 // Parse the incoming activity and authenticate the request
                 Activity activity;
+                logger.LogInformation(activity);
+
                 try
                 {
                     var authorizationHeader = GetAuthorizationHeader(req);

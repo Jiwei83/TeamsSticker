@@ -109,13 +109,13 @@ namespace StickersTemplate
 
                 // Parse the incoming activity and authenticate the request
                 Activity activity;
-                logger.LogInformation(activity);
 
                 try
                 {
                     var authorizationHeader = GetAuthorizationHeader(req);
                     activity = await ParseRequestBody(req);
                     await JwtTokenValidation.AuthenticateRequest(activity, authorizationHeader, credentialProvider, channelProvider);
+                    logger.LogInformation(activity);
                 }
                 catch (JsonReaderException e)
                 {

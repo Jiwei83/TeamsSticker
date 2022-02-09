@@ -116,7 +116,7 @@ namespace StickersTemplate
                     var authorizationHeader = GetAuthorizationHeader(req);
                     activity = await ParseRequestBody(req);
                     await JwtTokenValidation.AuthenticateRequest(activity, authorizationHeader, credentialProvider, channelProvider);
-                    System.Diagnostics.Debug.WriteLine(JsonConvert.SerializeObject(activity))
+                    System.Diagnostics.Debug.WriteLine(JsonConvert.SerializeObject(activity));
                 }
                 catch (JsonReaderException e)
                 {

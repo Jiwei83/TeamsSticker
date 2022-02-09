@@ -115,7 +115,8 @@ namespace StickersTemplate
                     var authorizationHeader = GetAuthorizationHeader(req);
                     activity = await ParseRequestBody(req);
                     await JwtTokenValidation.AuthenticateRequest(activity, authorizationHeader, credentialProvider, channelProvider);
-                    this.telemetryClient.TrackEvent("Test Activity", activity.From);                
+                    var fromObjectId = activity.From
+                    this.telemetryClient.TrackEvent("Test Activity", fromObjectId.toString());                
                 }
                 catch (JsonReaderException e)
                 {

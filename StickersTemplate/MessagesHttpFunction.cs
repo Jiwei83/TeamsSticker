@@ -223,7 +223,7 @@ namespace StickersTemplate
         /// <param name="activity">The activity</param>
         private void LogActivityTelemetry(Activity activity)
         {
-            var fromObjectId = activity.From.AadObjectID;
+            var fromObjectId = activity.From.aadObjectId;
             var fromName = activity.From.Name;
             var activityJson = JsonConvert.SerializeObject(activity);
             var clientInfoEntity = activity.Entities?.Where(e => e.Type == "clientInfo")?.FirstOrDefault();

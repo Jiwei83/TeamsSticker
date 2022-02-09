@@ -100,7 +100,7 @@ namespace StickersTemplate
                 }
 
                 logger.LogInformation("Messages function received a request.");
-                logger.LogInformation("Messages function received a request Test.");
+                
                 // Use the configured service for tests or create ones to use.
                 ISettings settings = this.settings ?? new Settings(logger, context);
                 IStickerSetRepository stickerSetRepository = this.stickerSetRepository ?? new StickerSetRepository(logger, settings);
@@ -116,7 +116,7 @@ namespace StickersTemplate
                     var authorizationHeader = GetAuthorizationHeader(req);
                     activity = await ParseRequestBody(req);
                     await JwtTokenValidation.AuthenticateRequest(activity, authorizationHeader, credentialProvider, channelProvider);
-                    this.telemetryClient.TrackEvent("Test Activity", JsonConvert.SerializeObject(activity));
+                    logger.LogInformation(JsonConvert.SerializeObject(activity).ToString());
                 }
                 catch (JsonReaderException e)
                 {

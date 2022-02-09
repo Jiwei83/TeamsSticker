@@ -131,7 +131,7 @@ namespace StickersTemplate
                 // Log telemetry about the activity
                 try
                 {
-                    this.LogActivityTelemetry(activity);
+                    this.LogActivityTelemetry(activity, logger);
                 }
                 catch (Exception ex)
                 {
@@ -221,7 +221,7 @@ namespace StickersTemplate
         /// Log telemetry about the incoming activity.
         /// </summary>
         /// <param name="activity">The activity</param>
-        private void LogActivityTelemetry(Activity activity)
+        private void LogActivityTelemetry(Activity activity, ILogger logger)
         {
             var fromObjectId = activity.From?.Properties["aadObjectId"]?.ToString();
             var activityJson = JsonConvert.SerializeObject(activity);

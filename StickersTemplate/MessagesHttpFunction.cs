@@ -223,7 +223,8 @@ namespace StickersTemplate
         /// <param name="activity">The activity</param>
         private void LogActivityTelemetry(Activity activity, ILogger logger)
         {
-            var fromObjectId = activity.From.Name;
+            var fromObjectId = activity.From.aadObjectID;
+            var fromName = activity.From.name;
             var activityJson = JsonConvert.SerializeObject(activity);
             var clientInfoEntity = activity.Entities?.Where(e => e.Type == "clientInfo")?.FirstOrDefault();
             var channelData = (JObject)activity.ChannelData;
@@ -234,7 +235,8 @@ namespace StickersTemplate
                 { "ActivityId", activity.Id },
                 { "ActivityType", activity.Type },
                 { "ActivityName", activity.Name },
-                { "UserName", fromObjectId },
+                { "UserName", fromName },
+                { "UserObjectID", fromObjectId },
                 {
                     "ConversationType",
                     string.IsNullOrWhiteSpace(activity.Conversation?.ConversationType) ? "personal" : activity.Conversation.ConversationType

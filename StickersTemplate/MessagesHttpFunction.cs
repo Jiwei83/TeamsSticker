@@ -131,7 +131,7 @@ namespace StickersTemplate
                 // Log telemetry about the activity
                 try
                 {
-                    this.LogActivityTelemetry(activity, logger);
+                    this.LogActivityTelemetry(activity);
                 }
                 catch (Exception ex)
                 {
@@ -221,15 +221,13 @@ namespace StickersTemplate
         /// Log telemetry about the incoming activity.
         /// </summary>
         /// <param name="activity">The activity</param>
-        private void LogActivityTelemetry(Activity activity, ILogger logger)
+        private void LogActivityTelemetry(Activity activity)
         {
             var fromObjectId = activity.From.aadObjectID;
             var fromName = activity.From.name;
             var activityJson = JsonConvert.SerializeObject(activity);
             var clientInfoEntity = activity.Entities?.Where(e => e.Type == "clientInfo")?.FirstOrDefault();
             var channelData = (JObject)activity.ChannelData;
-            logger.LogInformation(JsonConvert.SerializeObject(activity).ToString());
-
             var properties = new Dictionary<string, string>
             {
                 { "ActivityId", activity.Id },
@@ -246,7 +244,6 @@ namespace StickersTemplate
                 { "Locale", clientInfoEntity?.Properties["locale"]?.ToString() },
                 { "Platform", clientInfoEntity?.Properties["platform"]?.ToString() }
             };
-            //this.telemetryClient.TrackTrace("TestJiwei", SeverityLevel.Information);
             this.telemetryClient.TrackEvent("UserActivity", properties);
         }
     }

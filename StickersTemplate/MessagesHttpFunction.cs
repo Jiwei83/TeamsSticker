@@ -116,7 +116,6 @@ namespace StickersTemplate
                     var authorizationHeader = GetAuthorizationHeader(req);
                     activity = await ParseRequestBody(req);
                     await JwtTokenValidation.AuthenticateRequest(activity, authorizationHeader, credentialProvider, channelProvider);
-                    logger.LogInformation(JsonConvert.SerializeObject(activity).ToString());
                 }
                 catch (JsonReaderException e)
                 {
@@ -228,7 +227,7 @@ namespace StickersTemplate
             var activityJson = JsonConvert.SerializeObject(activity);
             var clientInfoEntity = activity.Entities?.Where(e => e.Type == "clientInfo")?.FirstOrDefault();
             var channelData = (JObject)activity.ChannelData;
-            var fromName = activityJson.["From"].["name"].ToString();
+            logger.LogInformation(JsonConvert.SerializeObject(activity).ToString());
 
             var properties = new Dictionary<string, string>
             {

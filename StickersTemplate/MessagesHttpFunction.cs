@@ -29,6 +29,7 @@ namespace StickersTemplate
     using StickersTemplate.Interfaces;
     using StickersTemplate.Providers;
     using StickersTemplate.WebModels;
+    using Newtonsoft.Json;
 
     /// <summary>
     /// Azure Function that handles HTTP messages from BotFramework.
@@ -115,9 +116,7 @@ namespace StickersTemplate
                     var authorizationHeader = GetAuthorizationHeader(req);
                     activity = await ParseRequestBody(req);
                     await JwtTokenValidation.AuthenticateRequest(activity, authorizationHeader, credentialProvider, channelProvider);
-                    var fromObjectId = activity.From？.Properties["aadObjectId"]？.ToString();
-                    logger.LogInformation(fromObjectId);  
-                    System.Diagnostics.Debug.WriteLine(activity)
+                    System.Diagnostics.Debug.WriteLine(JsonConvert.SerializeObject(activity))
                 }
                 catch (JsonReaderException e)
                 {
